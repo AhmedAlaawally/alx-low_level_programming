@@ -1,32 +1,35 @@
-#include "main.h"
+
+#include "holberton.h"
 /**
-*cap_string - function that capitalize first character of a word
-*@str: string to capitalize
-*Return:returns the capitalized string
-*/
+ * c_2_upper - fuction capitalize the strings.
+ * @letter: is the string to capitalize.
+ */
+void c_2_upper(char *letter)
+{
+	if (*letter >= 'a' && *letter <= 'z')
+		*letter -= 32;
+}
+/**
+ * cap_string - function that capitalizes all words of a string.
+ * @str: is the string to capitalize.
+ * Return: str.
+ */
 char *cap_string(char *str)
 {
-	int index = 0;
+	int i, j;
+	char separators[] = " ,;.!?(){}\"\t\n";
 
-	while (str[++index])
-	{
-		while (!(str[index] >= 'a' && str[index] <= 'z'))
-			index++;
-
-		if (str[index - 1] == ' ' ||
-				str[index - 1] == '\t' ||
-				str[index - 1] == '\n' ||
-				str[index - 1] == ',' ||
-				str[index - 1] == ';' ||
-				str[index - 1] == '.' ||
-				str[index - 1] == '!' ||
-				str[index - 1] == '?' ||
-				str[index - 1] == '"' ||
-				str[index - 1] == '(' ||
-				str[index - 1] == ')' ||
-				str[index - 1] == '{' ||
-				str[index - 1] == '}')
-			str[index] -= 32;
-	}
+	for (i = 0; str[i] != '\0'; i++)
+		for (j = 0; separators[j] != '\0'; j++)
+			if (i == 0)
+			{
+				c_2_upper(&str[i]);
+				break;
+			}
+			else if (str[i - 1] == separators[j])
+			{
+				c_2_upper(&str[i]);
+				break;
+			}
 	return (str);
 }
